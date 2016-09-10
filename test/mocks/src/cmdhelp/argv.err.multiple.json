@@ -1,0 +1,11 @@
+{
+  "_": [
+    "echo foo"
+  ],
+  "foo": [
+    "echo foo"
+  ],
+  "bar": [
+    "echo bar"
+  ]
+}
