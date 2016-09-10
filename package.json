@@ -1,40 +1,52 @@
 {
-    "name": "fireprocess",
-    "version": "0.1.0",
-    "description": "node package to manage child processes",
-    "preferGlobal": true,
-	"private":false,
-    "license": "MIT",
-    "homepage": "https://github.com/mjzzanichelli/fireprocess",
-	"author":{
-		"name" : "Jose' Marco Zanichelli",
-		"email" : "mjzzanichelli@hotmail.com"
-	},
-    "publishConfig":{
-		"registry": "https://registry.npmjs.org",
-		"access": "public"
-	},
-    "repository" :{
-        "type" : "git",
-        "url" : "git@github.com:mjzzanichelli/fireprocess.git"
-    },
-    "bin": "cli/fireprocess.js",
-    "main":"src/main.js",
-    "scripts":{
-        "test_win": "cd test && for /r %G in (\"*.spec.js\") DO mocha %G",
-        "test": "for d in test/**/*.spec.js; do mocha \"$d\"; done;",
-        "docs": "jsdoc src -r -p -d docs"
-    },
-    "dependencies": {
-        "minimist": "1.2.0",
-        "async": "2.0.1",
-        "colors": "1.1.2"
-    },
-    "devDependencies": {
-        "chai": "3.5.0",
-        "mocha": "3.0.2",
-        "should": "11.1.0",
-        "sinon": "1.17.5",
-        "jsdoc": "3.4.1"
-    }
+  "name": "fireprocess",
+  "version": "0.1.1",
+  "description": "node package to manage child processes",
+  "preferGlobal": true,
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/mjzzanichelli/fireprocess",
+  "author": {
+    "name": "Jose' Marco Zanichelli",
+    "email": "mjzzanichelli@hotmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mjzzanichelli/fireprocess.git"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "keywords": [
+    "node",
+    "child_process",
+    "fork",
+    "spawn",
+    "exec",
+    "execFile",
+    "cli"
+  ],
+  "bin": "cli/fireprocess.js",
+  "main": "src/main.js",
+  "scripts": {
+    "test_win": "cd test && for /r %G in (\"*.spec.js\") DO mocha %G",
+    "test": "for d in test/**/*.spec.js; do mocha \"$d\"; done;",
+    "docs": "jsdoc src -r -p -d docs"
+  },
+  "dependencies": {
+    "minimist": "1.2.0",
+    "async": "2.0.1",
+    "colors": "1.1.2"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "mocha": "3.0.2",
+    "should": "11.1.0",
+    "sinon": "1.17.5",
+    "jsdoc": "3.4.1"
+  }
 }
