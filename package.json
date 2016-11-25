@@ -1,6 +1,6 @@
 {
   "name": "fireprocess",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "node package to manage child processes",
   "preferGlobal": true,
   "private": false,
