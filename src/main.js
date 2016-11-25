@@ -68,6 +68,11 @@ var setArgs = function (type) {
 
 var FireProcess = function () {
   this.processes = [];
+  process.on('close', function () {
+    this.processes.forEach(function (proc) {
+      proc.exit()
+    })
+  }.bind(this))
 };
 
 FireProcess.prototype.exec = function () {
