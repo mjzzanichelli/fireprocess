@@ -43,34 +43,54 @@ var runProcess = function (type, cmd, args, opts, callback) {
 var setArgs = function (type) {
   var is_exec = type === "exec";
   return function (cmd, args, opts, callback) {
+    var env = process.env;
+    env.SILENT = silence.status()
     var _arguments = Array.prototype.slice.call(arguments, 0);
     switch (arguments.length - 1) {
       case 0:
         callback = function () { };
-        opts = { silent: silence.status() };
+        opts = { env };
         args = [];
         break;
       case 1:
         callback = _arguments[1];
-        opts = { silent: silence.status() };
+        opts = { env };
         args = [];
-
         break;
       case 2:
         callback = _arguments[2];
-        opts = is_exec ? _arguments[1] || { silent: silence.status() } : { silent: silence.status() };
-        args = is_exec ? [] : _arguments[1];
+        if (is_exec) {
+          opts = (function (arg) {
+            var opts = typeof arg === 'object' ? Object.create(arg) : {};
+            opts.env = env
+            return opts;
+          })(_arguments[1])
+          args = []
+        } else {
+          opts = { env };
+        }
         break;
-    }
+      case 3:
+        opts = (function (arg) {
+          var opts = typeof arg === 'object' ? Object.create(arg) : {};
+          opts.env = env
+          return opts;
+        })(opts)
+        break;
+    };
+    // console.log(type, "@@", cmd, "@@", args, "@@", opts)
     return runProcess.call(this, type, cmd, args, opts, callback);
   };
 };
 
 var FireProcess = function () {
   this.processes = [];
-  process.on('close', function () {
+  process.on('SIGINT', function () {
     this.processes.forEach(function (proc) {
-      proc.exit()
+      proc.kill('SIGINT')
+      // // proc.kill('SIGINT')
+      // console.log(proc.pid)
+      // process.kill(proc.pid,'SIGINT')
     })
   }.bind(this))
 };
