@@ -59,7 +59,7 @@ var setArgs = function (type) {
         callback = _arguments[2];
         if (is_exec) {
           opts = (function (arg) {
-            var opts = typeof arg === 'object' ? Object.create(arg) : {};
+            var opts = typeof arg === 'object' ? Object.assign({},arg) : {};
             opts.env = env
             return opts;
           })(_arguments[1])
@@ -70,7 +70,7 @@ var setArgs = function (type) {
         break;
       case 3:
         opts = (function (arg) {
-          var opts = typeof arg === 'object' ? Object.create(arg) : {};
+          var opts = typeof arg === 'object' ? Object.assign({},arg) : {};
           opts.env = env
           return opts;
         })(opts)
