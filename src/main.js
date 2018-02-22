@@ -24,8 +24,6 @@ var setProc = function (type, args, opts) {
 var runProcess = function (type, cmd, args, opts, callback) {
   silence.log(colors.yellow("---------------------------------------"));
   silence.log(colors.yellow("FIREPROCESS - " + type.toUpperCase() + ":"));
-  silence.log(colors.yellow("ARGS: " + JSON.stringify(args) + ":"));
-  silence.log(colors.yellow("OPTIONS: " + JSON.stringify(opts) + ":"));
   silence.log(colors.yellow(cmd + " " + (args || []).join(" ")));
   silence.log(colors.yellow("---------------------------------------"));
   var proc = setProc(type, args, opts);
