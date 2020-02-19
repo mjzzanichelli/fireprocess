@@ -38,6 +38,11 @@ var runProcess = function (type, cmd, args, opts, callback) {
   return proc;
 };
 
+
+var getCallback = function(val){
+  return typeof val === 'function' ? val : function(){}  
+}
+
 var setArgs = function (type) {
   var is_exec = type === "exec";
   return function (cmd, args, opts, callback) {
@@ -46,17 +51,17 @@ var setArgs = function (type) {
     var _arguments = Array.prototype.slice.call(arguments, 0);
     switch (arguments.length - 1) {
       case 0:
-        callback = function () { };
+        callback = getCallback();
         opts = { env };
         args = [];
         break;
       case 1:
-        callback = _arguments[1];
+        callback = getCallback(_arguments[1]);
         opts = { env };
         args = [];
         break;
       case 2:
-        callback = _arguments[2];
+        callback = getCallback(_arguments[2]);
         if (is_exec) {
           opts = (function (arg) {
             var opts = typeof arg === 'object' ? Object.assign({},arg) : {};
