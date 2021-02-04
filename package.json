@@ -22,9 +22,6 @@
     "type": "git",
     "url": "git@github.com:mjzzanichelli/fireprocess.git"
   },
-  "engines": {
-    "node": ">=0.10"
-  },
   "keywords": [
     "node",
     "child_process",
