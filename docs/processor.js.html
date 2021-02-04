@@ -42,48 +42,48 @@
  * @description
  Accepts &lt;b>minimist&lt;/b> argument and callback, and fires a new childprocess.
  */
-processArgs = function(args,callback){
-    async.waterfall([
-        checker.getParser(args)
-        , startProcess
-    ],processResults(callback));
-    return {
-        flag_types: extend({},flag_types),
-        default_flag: default_flag
-    };
+processArgs = function (args, callback) {
+  async.waterfall([
+    checker.getParser(args)
+    , startProcess
+  ], processResults(callback));
+  return {
+    flag_types: extend({}, flag_types),
+    default_flag: default_flag
+  };
 };
 
 var async = require("async"),
-    colors = require('colors/safe'),
-    fireprocess = require("./main"),
-    CmdHelp = require("./cmdhelp"),
-    extend = require('util')._extend,
-    silence = require("./silence"),
-/**
- * @private
- * @alias Processor.flag_types
- * @memberof Processor
- * @var {object} flag_types
- * @description
- Available flags.
- */
-    flag_types = {
-        "x"  : {description:"-[-]x[=]&lt;command>" ,method:"exec"},
-        "xf" : {description:"--xf[=]&lt;command>" ,method:"execFile"},
-        "f"  : {description:"-f[=]&lt;command>" ,method:"fork"},
-        "s"  : {description:"-s[=]&lt;command>" ,method:"spawn"}
-    },
-/**
- * @private
- * @alias Processor.default_flag
- * @var {string} default_flag
- * @memberof Processor
- * @description
-    default fla
- */
-    default_flag = "x",
-    checker = new CmdHelp(flag_types,default_flag)
-;
+  colors = require('colors/safe'),
+  fireprocess = require("./main"),
+  CmdHelp = require("./cmdhelp"),
+  extend = require('util')._extend,
+  silence = require("./silence"),
+  /**
+   * @private
+   * @alias Processor.flag_types
+   * @memberof Processor
+   * @var {object} flag_types
+   * @description
+   Available flags.
+   */
+  flag_types = {
+    "x": { description: "-[-]x[=]&lt;command>", method: "exec" },
+    "xf": { description: "--xf[=]&lt;command>", method: "execFile" },
+    "f": { description: "-f[=]&lt;command>", method: "fork" },
+    "s": { description: "-s[=]&lt;command>", method: "spawn" }
+  },
+  /**
+   * @private
+   * @alias Processor.default_flag
+   * @var {string} default_flag
+   * @memberof Processor
+   * @description
+      default fla
+   */
+  default_flag = "x",
+  checker = new CmdHelp(flag_types, default_flag)
+  ;
 
 /**
  * @private
@@ -91,14 +91,14 @@ var async = require("async"),
  * @memberof Processor
  * @returns &lt;b>process&lt;/b>
  */
-printFlags = function(){
-    silence.log(colors.yellow("-------------"));
-    silence.log(colors.yellow("Flags allowed"));
-    Object.keys(flag_types).forEach(function(f){
-        silence.log(colors.yellow(flag_types[f].method+" : "+ flag_types[f].description));
-    }.bind(this));
-    silence.log(colors.yellow("-------------"));
-    return this;
+printFlags = function () {
+  silence.log(colors.yellow("-------------"));
+  silence.log(colors.yellow("Flags allowed"));
+  Object.keys(flag_types).forEach(function (f) {
+    silence.log(colors.yellow(flag_types[f].method + " : " + flag_types[f].description));
+  }.bind(this));
+  silence.log(colors.yellow("-------------"));
+  return this;
 };
 
 /**
@@ -108,7 +108,7 @@ printFlags = function(){
  * @param {string} flag - a key in {@link Processor.flag_types flag_types}
  * @returns {string} {@link Processor.flag_types flag_types[flag].method}
  */
-getMethodName = function(flag){
+getMethodName = function (flag) {
   return flag_types[flag].method;
 };
 
@@ -118,19 +118,19 @@ getMethodName = function(flag){
  * @memberof Processor
  * @param {function} callback - passes process response back to {@link Processor}
  */
-processResults = function(callback){
-    callback = callback || function(){};
-    return function(err,data){
-        if (!err) return callback(null,data);
-        if (err.res &amp;&amp; err.args){
-            silence.log(colors.red("Err "+err.res.id+": "+err.res.msg));
-            Object.keys(err.args).forEach(function(a){
-                silence.log(colors.red(a+" => "+ err.args[a]));
-            });
-            printFlags();
-        } else silence.log(colors.red(err));
-        callback(err)
-    }
+processResults = function (callback) {
+  callback = callback || function () { };
+  return function (err, data) {
+    if (!err) return callback(null, data);
+    if (err.res &amp;&amp; err.args) {
+      silence.log(colors.red("Err " + err.res.id + ": " + err.res.msg));
+      Object.keys(err.args).forEach(function (a) {
+        silence.log(colors.red(a + " => " + err.args[a]));
+      });
+      printFlags();
+    } else silence.log(colors.red(err));
+    callback(err)
+  }
 };
 
 /**
@@ -140,8 +140,8 @@ processResults = function(callback){
  * @param {object} opts
  * @param {function} [callback]
  */
-startProcess = function(opts,callback){
-    return fireprocess[getMethodName(opts.type)](opts.cmd,callback);
+startProcess = function (opts, callback) {
+  return fireprocess[getMethodName(opts.type)](opts.cmd, callback);
 };
 
 
@@ -167,7 +167,7 @@ module.exports = processArgs;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sat Sep 10 2016 10:10:41 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 04 2021 12:46:30 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>
